@@ -2830,7 +2830,9 @@ uint32_t getParamVarAddress( union t_varAddress *ptr, uint32_t size )
 	uint32_t result = 0 ;
 	uint32_t value ;
 	uint16_t val16 ;
-	
+
+	// Note that ipointer and bpointer occupy the same space so
+	// this clears bpointer as well.
 	ptr->ipointer = 0 ;
 
 	opcode = *RunTime->ExecProgPtr++ ;
@@ -4373,7 +4375,7 @@ int32_t exec_crossfiresend()
 			if ( result == 1 )
 			{
 				length = param.var ;
-				result = getParamVarAddress( &address, 0 ) ;
+				result = getParamVarAddress( &address, length ) ;
 				if ( result == 1 )	// Byte array
 				{
 #ifdef QT
