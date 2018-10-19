@@ -551,26 +551,26 @@ uint8_t setupPulsesXfire()
 	else
 	{
 		startChan = g_model.Module[1].startChannel ;
-  	*buf++ = 24 ; // 1(ID) + 22 + 1(CRC)
-  	uint8_t *crc_start = buf ;
-  	*buf++ = CHANNELS_ID ;
-  	uint32_t bits = 0 ;
-  	uint32_t bitsavailable = 0 ;
-  	for (uint32_t i=0 ; i < CROSSFIRE_CHANNELS_COUNT ; i += 1 )
+		*buf++ = 24 ; // 1(ID) + 22 + 1(CRC)
+		uint8_t *crc_start = buf ;
+		*buf++ = CHANNELS_ID ;
+		uint32_t bits = 0 ;
+		uint32_t bitsavailable = 0 ;
+		for (uint32_t i=0 ; i < CROSSFIRE_CHANNELS_COUNT ; i += 1 )
 		{
-  	  uint32_t val = limit(0, CROSSFIRE_CH_CENTER + (((g_chans512[startChan+i]) * 4) / 5), 2*CROSSFIRE_CH_CENTER) ;
-  	  bits |= val << bitsavailable ;
-  	  bitsavailable += CROSSFIRE_CH_BITS ;
-  	  while (bitsavailable >= 8)
+			uint32_t val = limit(0, CROSSFIRE_CH_CENTER + (((g_chans512[startChan+i]) * 4) / 5), 2*CROSSFIRE_CH_CENTER) ;
+			bits |= val << bitsavailable ;
+			bitsavailable += CROSSFIRE_CH_BITS ;
+			while (bitsavailable >= 8)
 			{
-  	    *buf++ = bits ;
-  	    bits >>= 8 ;
-  	    bitsavailable -= 8 ;
-  	  }
-  	}
-  	*buf++ = crc8( crc_start, 23) ;
+				*buf++ = bits ;
+				bits >>= 8 ;
+				bitsavailable -= 8 ;
+			}
+		}
+		*buf++ = crc8( crc_start, 23) ;
 	}
-  return (XfireLength = (buf - Bit_pulses)) ;
+	return (XfireLength = (buf - Bit_pulses)) ;
 }
 
 
