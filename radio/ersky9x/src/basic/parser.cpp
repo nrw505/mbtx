@@ -2828,7 +2828,7 @@ uint32_t getParamVarAddress( union t_varAddress *ptr, uint32_t size )
 {
 	uint8_t opcode ;
 	uint32_t result = 0 ;
-  uint32_t value ;
+	uint32_t value ;
 	uint16_t val16 ;
 	
 	ptr->ipointer = 0 ;
@@ -2866,7 +2866,7 @@ uint32_t getParamVarAddress( union t_varAddress *ptr, uint32_t size )
 			}
 			else
 			{
-        ptr->ipointer = &RunTime->IntArrayStart[val16] ;
+				ptr->ipointer = &RunTime->IntArrayStart[val16] ;
 				result = 2 ;
 			}
 		}
@@ -4272,7 +4272,7 @@ int32_t exec_crossfirereceive()
 {
 	union t_varAddress param[3] ;
 	uint8_t type[4] ;
-  uint8_t length ;
+	uint8_t length ;
 	int32_t value ;
 	uint32_t result ;
 	uint32_t tidy = 1 ;
@@ -4288,7 +4288,7 @@ int32_t exec_crossfirereceive()
 			if ( result )
 			{
 #ifdef QT
-        value = 0 ;
+				value = 0 ;
 #else
 				value = peek_fifo128( &Lua_fifo ) ;
 #endif
